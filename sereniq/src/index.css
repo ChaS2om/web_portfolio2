@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'MaruBuri';
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.woff2) format('woff2');
+  font-weight: 200;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'MaruBuri';
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.woff2) format('woff2');
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'MaruBuri';
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2) format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'MaruBuri';
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.woff2) format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'MaruBuri';
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.woff2) format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SUITE';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SUITE';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SUITE';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SUITE';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SUITE';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@theme {
+  --font-serif: "Noto Serif", serif;
+  --font-sans: "SUITE", "Noto Sans KR", sans-serif;
+  --font-maru: "MaruBuri", serif;
+  
+  --color-sereniq-pink: #EAD6D8;
+  --color-sereniq-rose: #F5EDEE;
+  --color-sereniq-brown: #4B3B3D;
+  --color-sereniq-gray: #7F7374;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-sereniq-brown);
+    background-color: #FFFFFF;
+    -webkit-font-smoothing: antialiased;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-sereniq-rose) transparent;
+  }
+  
+  /* Custom thin scrollbar */
+  body::-webkit-scrollbar {
+    width: 6px;
+  }
+  body::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  body::-webkit-scrollbar-thumb {
+    background-color: var(--color-sereniq-rose);
+    border-radius: 3px;
+  }
+}
+
+.custom-shadow {
+  box-shadow: 0 10px 30px -10px rgba(75, 59, 61, 0.12);
+}
+
+.custom-shadow-lg {
+  box-shadow: 0 20px 40px -15px rgba(75, 59, 61, 0.18);
+}
+
+.optimized-image {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: auto;
+}
+

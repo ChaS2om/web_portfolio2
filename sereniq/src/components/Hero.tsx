@@ -1,0 +1,185 @@
+import React, { useState } from 'react';
+import { HERO_BACKGROUND, BRAND_STORY_IMAGE } from '../data';
+import { motion, AnimatePresence } from 'motion/react';
+import { ArrowUpRight, X, Sparkles, ShieldCheck, Leaf, Heart } from 'lucide-react';
+
+interface HeroProps {
+  onExploreClick: () => void;
+}
+
+export default function Hero({ onExploreClick }: HeroProps) {
+  const [isStoryModalOpen, setIsStoryModalOpen] = useState(false);
+
+  return (
+    <section
+      id="hero"
+      className="relative w-full overflow-hidden bg-white mt-[76px] select-none"
+      data-purpose="hero-banner"
+    >
+      {/* 
+        CONTAINER for Hero Image.
+        Renders the pristine original campaign banner exactly as uploaded by the user.
+      */}
+      <div className="w-full relative aspect-[1915/821] overflow-hidden bg-stone-50 animate-fade-in">
+        
+        {/* Background Image rendered naturally and unmodified */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+          className="w-full h-full"
+        >
+          <img
+            src={HERO_BACKGROUND}
+            alt="SERENIQ Luxurious Campaign"
+            className="w-full h-full object-cover object-center select-none animate-scale-subtle"
+            style={{
+              imageRendering: '-webkit-optimize-contrast',
+              filter: 'contrast(1.02) saturate(1.02)',
+              transform: 'translateZ(0)',
+              backfaceVisibility: 'hidden',
+            }}
+            referrerPolicy="no-referrer"
+          />
+        </motion.div>
+
+        {/* Delicate premium shading scrim */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/5 via-transparent to-transparent pointer-events-none" />
+
+        {/* Floating "자세히 보기" Button positioned exactly over the line/trigger on the bottom left */}
+        <div className="absolute bottom-[17.5%] left-[calc(6.2%-2px)] z-20 flex justify-start items-center w-auto">
+          <motion.button
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              setIsStoryModalOpen(true);
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            className="px-[30px] py-[9px] bg-[#E3D7FA] hover:bg-[#D5C2F7] text-[#3C2D4D] text-[9px] sm:text-xs md:text-sm font-semibold tracking-wider rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
+          >
+            <span>자세히 보기</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </motion.button>
+        </div>
+      </div>
+
+      {/* FULLSTORY DETAIL DIALOG / BRAND DIALOG SPEC */}
+      <AnimatePresence>
+        {isStoryModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-neutral-900/60 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 15 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 15 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 280 }}
+              className="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative border border-sereniq-pink/10"
+            >
+              
+              {/* Top Sticky Header */}
+              <div className="sticky top-0 bg-white/95 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b border-neutral-100 z-10">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-serif tracking-[0.2em] text-xs text-sereniq-pink font-extrabold uppercase">
+                    SERENIQ PHILOSOPHY ARCHIVE
+                  </span>
+                </div>
+                <button
+                  onClick={() => setIsStoryModalOpen(false)}
+                  className="p-1.5 rounded-full hover:bg-neutral-150 transition-colors text-sereniq-brown"
+                  aria-label="닫기"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Modal Body Contents */}
+              <div className="p-6 md:p-8 space-y-8 text-sereniq-brown">
+                
+                {/* Visual Banner */}
+                <div className="relative rounded-2xl overflow-hidden aspect-[16/9] bg-stone-50">
+                  <img
+                    src={BRAND_STORY_IMAGE}
+                    alt="Sereniq brand aesthetic values"
+                    className="w-full h-full object-cover object-center"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-neutral-950/20" />
+                </div>
+
+                {/* Main Story Blocks */}
+                <div className="space-y-4">
+                  <h3 className="font-maru text-xl md:text-2xl font-light text-sereniq-brown tracking-wide">
+                    과한 것은 완벽히 비우고,<br />
+                    <span className="font-semibold text-sereniq-pink">가장 깊고 평온한 고유함만</span>
+                  </h3>
+                  
+                  <p className="text-xs md:text-sm text-sereniq-brown/80 leading-relaxed font-medium">
+                    세레니크(SERENIQ)는 복잡하고 피로해진 현대 도시인들이 바라는 진정한 휴식과 내추럴 오라(Aura)를 완성하기 위해 탄생한 미니멀 프리미엄 뷰티 하우스입니다. 유기물이나 위험 성분이 될 수 있는 모든 화학적 가이드를 철저하게 최소화하고, 자연의 순수 진정 시너지 원천을 완벽하고 조화롭게 팽창시킵니다.
+                  </p>
+                </div>
+
+                {/* Core Brand Manifesto Values Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                  <div className="p-4 bg-[#FFF8F8] rounded-2xl border border-sereniq-pink/10 space-y-2">
+                    <Sparkles className="w-5 h-5 text-sereniq-pink" />
+                    <h4 className="text-xs font-bold text-sereniq-brown tracking-wide">크리스탈 포뮬러</h4>
+                    <p className="text-[11px] text-sereniq-brown/70 leading-relaxed">
+                      병풀 추출물을 물 대신 풍부하게 함유하여, 가장 투명하고 차분한 피부 에센스를 구현합니다.
+                    </p>
+                  </div>
+
+                  <div className="p-4 bg-[#FFF8F8] rounded-2xl border border-sereniq-pink/10 space-y-2">
+                    <ShieldCheck className="w-5 h-5 text-sereniq-pink" />
+                    <h4 className="text-xs font-bold text-sereniq-brown tracking-wide">철저한 안심 검증</h4>
+                    <p className="text-[11px] text-sereniq-brown/70 leading-relaxed">
+                      모든 스킨케어 품목은 저자극 임상 및 하이포알레르제닉 가이드 승인을 완료하였습니다.
+                    </p>
+                  </div>
+
+                  <div className="p-4 bg-[#FFF8F8] rounded-2xl border border-sereniq-pink/10 space-y-2">
+                    <Leaf className="w-5 h-5 text-sereniq-pink" />
+                    <h4 className="text-xs font-bold text-sereniq-brown tracking-wide">에코 서스테이너블</h4>
+                    <p className="text-[11px] text-sereniq-brown/70 leading-relaxed">
+                      재활용 15등급 이상의 최고급 보틀과 콩기름 인쇄 패키지, 비유기 용기 순환 트랙을 도입합니다.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Bottom interactive action button */}
+                <div className="pt-4 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-neutral-100">
+                  <p className="text-[11px] md:text-xs text-neutral-400 font-medium">
+                    © SERENIQ COSMETICS • Soft, Clean, Premium skincare.
+                  </p>
+                  <div className="flex gap-2 w-full md:w-auto">
+                    <button
+                      onClick={() => {
+                        setIsStoryModalOpen(false);
+                        onExploreClick(); // Scroll directly to products
+                      }}
+                      className="px-5 py-2.5 bg-sereniq-brown hover:bg-sereniq-pink text-white text-xs font-bold tracking-wider rounded-xl transition-all w-full md:w-auto text-center"
+                    >
+                      전체 컬렉션 쇼핑하기
+                    </button>
+                    <button
+                      onClick={() => setIsStoryModalOpen(false)}
+                      className="px-5 py-2.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-600 text-xs font-bold tracking-wider rounded-xl transition-all w-full md:w-auto text-center"
+                    >
+                      창 닫기
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+}
+

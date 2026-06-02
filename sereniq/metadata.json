@@ -1,0 +1,6 @@
+{
+  "name": "SERENIQ",
+  "description": "세레니크 공식 온라인 스토어 - 고요함과 고유함, 어디서도 느끼지 못한 맑은 스킨케어",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
