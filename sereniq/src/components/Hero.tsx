@@ -118,8 +118,11 @@ export default function Hero({ onExploreClick }: HeroProps) {
           {HERO_IMAGES.map((_, i) => (
             <div key={i} className="w-12 sm:w-16 h-1.5 bg-white/30 rounded-full overflow-hidden cursor-pointer" onClick={() => { setIndex(i); progressRef.current = 0; setProgress(0); }}>
               <div
-                className={`h-full rounded-full ${i === index ? 'bg-sereniq-pink' : 'bg-white/40'}`}
-                style={{ width: i === index ? `${progress}%` : '100%' }}
+                className="h-full rounded-full"
+                style={{
+                  width: i === index ? `${progress}%` : '100%',
+                  backgroundColor: i === index ? '#cd9cdc' : 'rgba(255,255,255,0.4)',
+                }}
               />
             </div>
           ))}
@@ -137,22 +140,24 @@ export default function Hero({ onExploreClick }: HeroProps) {
         <div className="absolute inset-0 bg-gradient-to-r from-black/5 via-transparent to-transparent pointer-events-none" />
 
         {/* Floating "자세히 보기" Button positioned exactly over the line/trigger on the bottom left */}
-        <div className="absolute bottom-[17.5%] left-[calc(6.2%-2px)] z-20 flex justify-start items-center w-auto">
-          <motion.button
-            onClick={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
-              setIsStoryModalOpen(true);
-            }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            className="px-[30px] py-[9px] bg-[#E3D7FA] hover:bg-[#D5C2F7] text-[#3C2D4D] text-[9px] sm:text-xs md:text-sm font-semibold tracking-wider rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
-          >
-            <span>자세히 보기</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </motion.button>
-        </div>
-      </div>
++        {index === 0 && (
++          <div className="absolute bottom-[17.5%] left-[calc(6.2%-2px)] z-20 flex justify-start items-center w-auto">
++            <motion.button
++              onClick={(e) => {
++                e.stopPropagation();
++                e.preventDefault();
++                setIsStoryModalOpen(true);
++              }}
++              whileHover={{ scale: 1.05 }}
++              whileTap={{ scale: 0.98 }}
++              className="px-[30px] py-[9px] bg-[#E3D7FA] hover:bg-[#D5C2F7] text-[#3C2D4D] text-[9px] sm:text-xs md:text-sm font-semibold tracking-wider rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
++            >
++              <span>자세히 보기</span>
++              <ArrowUpRight className="w-3.5 h-3.5" />
++            </motion.button>
++          </div>
++        )}
+       </div>
 
       {/* FULLSTORY DETAIL DIALOG / BRAND DIALOG SPEC */}
       <AnimatePresence>
