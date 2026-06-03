@@ -1,8 +1,8 @@
 import { Product, Review } from './types';
 import review1Img from './assets/images/sereniq_review_toner_1780367167181.png';
 import review2Img from './assets/images/regenerated_image_1780369793882.png';
-import review3Img from './assets/images/regenerated_image_1780369791362.png';
-import review4Img from './assets/images/regenerated_image_1780370109350.png';
+import review3Img from './assets/images/regenerated_image_1780367467641.png';
+import review4Img from './assets/images/regenerated_image_1780367470267.png';
 import heroImage from './assets/images/ChatGPT Image 2026년 6월 1일 오후 12_38_58.png';
 import heroImage2 from './assets/images/HeroIMG_2.png';
 import heroImage3 from './assets/images/HeroIMG_3.png';
