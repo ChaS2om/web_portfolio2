@@ -125,7 +125,7 @@ export default function Hero({ onExploreClick }: HeroProps) {
             {index === 1 && (
               <div
                 className="absolute z-20 flex justify-start items-center w-auto"
-                style={{ bottom: 'calc(17.5% - 7px)', left: 'calc(6.2% + 8px)' }}
+                style={{ bottom: 'calc(17.5% - 12px)', left: 'calc(6.2% + 28px)' }}
               >
                 <motion.button
                   onClick={(e) => {
