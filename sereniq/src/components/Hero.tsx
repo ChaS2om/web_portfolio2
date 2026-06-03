@@ -160,7 +160,7 @@ export default function Hero({ onExploreClick }: HeroProps) {
           </div>
         )}
         {index === 1 && (
-          <div className="absolute bottom-[17.5%] left-[calc(6.2%-2px)] z-20 flex justify-start items-center w-auto">
+          <div className="absolute bottom-[14%] right-[6%] z-20 flex justify-end items-center w-auto">
             <motion.button
               onClick={(e) => {
                 e.stopPropagation();
@@ -273,7 +273,7 @@ export default function Hero({ onExploreClick }: HeroProps) {
                         세레니크 제품 사용 가이드
                       </h3>
                       <p className="text-xs md:text-sm text-sereniq-brown/80 leading-relaxed font-medium">
-                        두 번째 히어로 이미지에서 제품을 만났다면, 간단한 순서로 더 부드럽고 촉촉한 피부를 완성해 보세요.
+                        간단한 순서로 더 부드럽고 촉촉한 피부를 완성해 보세요.
                       </p>
                     </div>
 
