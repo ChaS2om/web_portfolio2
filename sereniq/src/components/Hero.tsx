@@ -106,7 +106,7 @@ export default function Hero({ onExploreClick }: HeroProps) {
 
             {/* Floating "자세히 보기" Buttons - moved inside motion.div to animate with image */}
             {index === 0 && (
-              <div className="absolute bottom-[17.5%] left-[calc(6.2%-2px)] z-20 flex justify-start items-center w-auto">
+              <div className="absolute bottom-[17.5%] left-[7%] z-20 flex justify-start items-center w-auto">
                 <motion.button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -125,7 +125,7 @@ export default function Hero({ onExploreClick }: HeroProps) {
             {index === 1 && (
               <div
                 className="absolute z-20 flex justify-start items-center w-auto"
-                style={{ bottom: 'calc(17.5% - 12px)', left: 'calc(6.2% + 28px)' }}
+                style={{ bottom: 'calc(17.5% - 12px)', left: '7%' }}
               >
                 <motion.button
                   onClick={(e) => {
