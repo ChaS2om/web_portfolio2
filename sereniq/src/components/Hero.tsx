@@ -160,7 +160,7 @@ export default function Hero({ onExploreClick }: HeroProps) {
           </div>
         )}
         {index === 1 && (
-          <div className="absolute bottom-[14%] right-[6%] z-20 flex justify-end items-center w-auto">
+          <div className="absolute bottom-[17.5%] left-[calc(6.2%-2px)] z-20 flex justify-start items-center w-auto">
             <motion.button
               onClick={(e) => {
                 e.stopPropagation();
