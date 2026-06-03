@@ -3,10 +3,16 @@ import review1Img from './assets/images/sereniq_review_toner_1780367167181.png';
 import review2Img from './assets/images/regenerated_image_1780369793882.png';
 import review3Img from './assets/images/regenerated_image_1780369791362.png';
 import review4Img from './assets/images/regenerated_image_1780370109350.png';
+import heroImage from './assets/images/ChatGPT Image 2026년 6월 1일 오후 12_38_58.png';
+import heroImage2 from './assets/images/HeroIMG_2.png';
+import heroImage3 from './assets/images/HeroIMG_3.png';
 
 export const BRAND_LOGO_DARK = "https://lh3.googleusercontent.com/aida-public/AB6AXuA-8d4BdyJruybd5vcY9uB6B3l-6eZR-hjCWMB41iQkNPbwDjIP8T4NXYnGwc1BedXBVywkqYNqt5yDa7XkpHJaig203G79pcryw8jFGVFAAIpd46EIHppcirVjKy42hEILP9W0ijNsjBJK9mqsvnCXpQjppH6YCucTK-RWAGUq6qpRCuIrnB6fSgD7zNp7qPwupfOAHx8n7SIY_s5JNrGktJ29f4KAMVK5oczaf-nQBDAFTnhBwMgz-fP4q_riVM0R-S4KxdpZbiVmAh8";
 
-export const HERO_BACKGROUND = "https://lh3.googleusercontent.com/aida-public/AB6AXuBvyldNCYWe4GNbFBINgO_9a4ehFeoFHFJRnwfDcw48maoB_CJu6FsxBzXzDdW5Iep6t2iChuI7S_YV-T2dvrP6MbsuXSSrdQTDI1kjTqACnK8xkMcHt6V101T1BvHjbu07OS1qNaJSNczyjKpPTp7wLh-cpF1XKXzWbuqnAxRvb2GKAJhuizaxnn0wvR-usrA6IsANfgUrJZCSSdWmkb5RK4Dimjj3_szL3wnMwXsGgtuZ3WZdhWHcTKeGiKXB12V64kGUsv9m_HxH=s0";
+export const HERO_BACKGROUND = heroImage;
+
+// Array of hero banner images used for the carousel
+export const HERO_IMAGES = [heroImage, heroImage2, heroImage3];
 
 export const BRAND_STORY_IMAGE = "https://lh3.googleusercontent.com/aida-public/AB6AXuD4zx4lte0HJ_4pNcIZkzJ4s7TyFV4pAKxy_211hDit8-tIAwn9lzCeEGMlYxsRdpKwAkE4gF5plWomaev8HTCb5sNkJCYaP_49DOzH9ujsIMVM4cgt2HQ74gFgqmcOikQqzPl3iGzNnW0fMRabpArpU69wuY78IFtPDYJx5LQqBzuYumYeY2ZkyEdw1ijXO-obST0TLh3tZRtAmANNeWANRl6F4a6F4NXQlMrTffZ1eoO3gy7T5MyPZ-7vNfknVs7-ox30yq147hdx";
 

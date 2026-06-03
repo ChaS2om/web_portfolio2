@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { HERO_BACKGROUND, BRAND_STORY_IMAGE } from '../data';
+import React, { useState, useEffect, useRef } from 'react';
+import { HERO_BACKGROUND, HERO_IMAGES, BRAND_STORY_IMAGE } from '../data';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowUpRight, X, Sparkles, ShieldCheck, Leaf, Heart } from 'lucide-react';
+import { ArrowUpRight, X, Sparkles, ShieldCheck, Leaf, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface HeroProps {
   onExploreClick: () => void;
@@ -9,6 +9,65 @@ interface HeroProps {
 
 export default function Hero({ onExploreClick }: HeroProps) {
   const [isStoryModalOpen, setIsStoryModalOpen] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(0); // 1 = next, -1 = prev
+
+  const total = HERO_IMAGES.length;
+
+  function handleNext(e?: React.MouseEvent) {
+    if (e) { e.stopPropagation(); e.preventDefault(); }
+    setDirection(1);
+    setIndex((i) => (i + 1) % total);
+    // reset progress when user navigates
+    progressRef.current = 0;
+    setProgress(0);
+  }
+
+  function handlePrev(e?: React.MouseEvent) {
+    if (e) { e.stopPropagation(); e.preventDefault(); }
+    setDirection(-1);
+    setIndex((i) => (i - 1 + total) % total);
+    // reset progress when user navigates
+    progressRef.current = 0;
+    setProgress(0);
+  }
+
+  // Auto-play progress (5s) and visual progress bar
+  const [progress, setProgress] = useState(0);
+  const progressRef = useRef(0);
+  const intervalRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    // reset progress when index changes
+    progressRef.current = 0;
+    setProgress(0);
+
+    // clear existing
+    if (intervalRef.current) window.clearInterval(intervalRef.current);
+
+    // only autoplay when more than one image
+    if (total > 1) {
+      intervalRef.current = window.setInterval(() => {
+        progressRef.current += 100 / 50; // 100ms * 50 = 5000ms
+        if (progressRef.current >= 100) {
+          progressRef.current = 0;
+          setProgress(0);
+          // advance slide
+          setDirection(1);
+          setIndex((i) => (i + 1) % total);
+        } else {
+          setProgress(progressRef.current);
+        }
+      }, 100);
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        window.clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, [index, total]);
 
   return (
     <section
@@ -21,27 +80,58 @@ export default function Hero({ onExploreClick }: HeroProps) {
         Renders the pristine original campaign banner exactly as uploaded by the user.
       */}
       <div className="w-full relative aspect-[1915/821] overflow-hidden bg-stone-50 animate-fade-in">
-        
-        {/* Background Image rendered naturally and unmodified */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.2, ease: 'easeOut' }}
-          className="w-full h-full"
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            initial={{ x: direction >= 0 ? 80 : -80, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: direction >= 0 ? -80 : 80, opacity: 0 }}
+            transition={{ duration: 0.6, ease: 'easeInOut' }}
+            className="w-full h-full absolute inset-0"
+          >
+            <img
+              src={HERO_IMAGES[index]}
+              alt={`SERENIQ Luxurious Campaign ${index + 1}`}
+              className="w-full h-full object-cover object-center select-none animate-scale-subtle"
+              style={{
+                imageRendering: '-webkit-optimize-contrast',
+                filter: 'contrast(1.02) saturate(1.02)',
+                transform: 'translateZ(0)',
+                backfaceVisibility: 'hidden',
+              }}
+              referrerPolicy="no-referrer"
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Arrows */}
+        <button
+          onClick={handlePrev}
+          aria-label="이전 슬라이드"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/80 hover:bg-white shadow-md transition"
         >
-          <img
-            src={HERO_BACKGROUND}
-            alt="SERENIQ Luxurious Campaign"
-            className="w-full h-full object-cover object-center select-none animate-scale-subtle"
-            style={{
-              imageRendering: '-webkit-optimize-contrast',
-              filter: 'contrast(1.02) saturate(1.02)',
-              transform: 'translateZ(0)',
-              backfaceVisibility: 'hidden',
-            }}
-            referrerPolicy="no-referrer"
-          />
-        </motion.div>
+          <ChevronLeft className="w-6 h-6 text-sereniq-brown" />
+        </button>
+
+        {/* Indicators (center bottom) */}
+        <div className="absolute left-0 right-0 bottom-6 z-30 flex justify-center items-center gap-2">
+          {HERO_IMAGES.map((_, i) => (
+            <div key={i} className="w-12 sm:w-16 h-1.5 bg-white/30 rounded-full overflow-hidden cursor-pointer" onClick={() => { setIndex(i); progressRef.current = 0; setProgress(0); }}>
+              <div
+                className={`h-full rounded-full ${i === index ? 'bg-sereniq-pink' : 'bg-white/40'}`}
+                style={{ width: i === index ? `${progress}%` : '100%' }}
+              />
+            </div>
+          ))}
+        </div>
+
+        <button
+          onClick={handleNext}
+          aria-label="다음 슬라이드"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/80 hover:bg-white shadow-md transition"
+        >
+          <ChevronRight className="w-6 h-6 text-sereniq-brown" />
+        </button>
 
         {/* Delicate premium shading scrim */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/5 via-transparent to-transparent pointer-events-none" />
