@@ -1,10 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BRAND_STORY_IMAGE } from '../data';
 import { Sparkles, Calendar, Heart, Shield, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function Showcase() {
   const [isStoryOpen, setIsStoryOpen] = useState(false);
+
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    if (isStoryOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+    } else {
+      const scrollY = parseInt(document.body.style.top || '0', 10) * -1;
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollY);
+    }
+    return () => {
+      const scrollY = parseInt(document.body.style.top || '0', 10) * -1;
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollY);
+    };
+  }, [isStoryOpen]);
 
   return (
     <>

@@ -12,6 +12,32 @@ export default function Hero({ onExploreClick }: HeroProps) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0); // 1 = next, -1 = prev
 
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    if (modalType) {
+      const scrollY = window.scrollY;
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+    } else {
+      const scrollY = parseInt(document.body.style.top || '0', 10) * -1;
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollY);
+    }
+    return () => {
+      const scrollY = parseInt(document.body.style.top || '0', 10) * -1;
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollY);
+    };
+  }, [modalType]);
+
   const total = HERO_IMAGES.length;
 
   function handleNext(e?: React.MouseEvent) {
@@ -71,40 +97,6 @@ export default function Hero({ onExploreClick }: HeroProps) {
     };
   }, [index, total]);
 
-  // Scroll lock when modal opens
-  useEffect(() => {
-    const body = document.body;
-    const html = document.documentElement;
-    if (modalType) {
-      const scrollY = window.scrollY || window.pageYOffset || 0;
-      // save current scroll and inline styles
-      body.dataset.scrollY = String(scrollY);
-      const prevPosition = body.style.position;
-      const prevTop = body.style.top;
-      const prevWidth = body.style.width;
-      const prevOverflow = html.style.overflow;
-
-      body.style.position = 'fixed';
-      body.style.top = `-${scrollY}px`;
-      body.style.left = '0';
-      body.style.right = '0';
-      body.style.width = '100%';
-      html.style.overflow = 'hidden';
-
-      return () => {
-        // restore inline styles
-        body.style.position = prevPosition;
-        body.style.top = prevTop;
-        body.style.width = prevWidth;
-        html.style.overflow = prevOverflow;
-        const saved = body.dataset.scrollY ? parseInt(body.dataset.scrollY, 10) : 0;
-        window.scrollTo(0, saved);
-        delete body.dataset.scrollY;
-      };
-    }
-    return;
-  }, [modalType]);
-
   return (
     <section
       id="hero"
@@ -139,19 +131,37 @@ export default function Hero({ onExploreClick }: HeroProps) {
             />
 
             {/* Floating "자세히 보기" Buttons - moved inside motion.div to animate with image */}
-            {(index === 0 || index === 1) && (
+            {index === 0 && (
+              <div className="absolute bottom-[17.5%] left-[calc(6.2%-2px)] z-20 flex justify-start items-center w-auto">
+                <motion.button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    setModalType('story');
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-[30px] py-[9px] bg-[#E3D7FA] hover:bg-[#D5C2F7] text-[#3C2D4D] text-[9px] sm:text-xs md:text-sm font-semibold tracking-wider rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
+                >
+                  <span>자세히 보기</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </motion.button>
+              </div>
+            )}
+            {index === 1 && (
               <div
-                className={`absolute z-20 flex justify-center items-center w-auto ${index === 0 ? 'right-4 bottom-6 sm:bottom-[17.5%] sm:right-auto sm:left-[calc(6.2%-2px)]' : 'right-4 bottom-6 sm:bottom-[16.5%] sm:right-auto sm:left-[7.5%]'}`}
+                className="absolute z-20 flex justify-start items-center w-auto"
+                style={{ bottom: 'calc(17.5% - 7px)', left: 'calc(6.2% + 8px)' }}
               >
                 <motion.button
                   onClick={(e) => {
                     e.stopPropagation();
                     e.preventDefault();
-                    setModalType(index === 0 ? 'story' : 'guide');
+                    setModalType('guide');
                   }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
-                  className="px-5 py-2 bg-[#E3D7FA] hover:bg-[#D5C2F7] text-[#3C2D4D] text-[8px] sm:px-[30px] sm:py-[9px] sm:text-[9px] md:text-sm font-semibold tracking-wider rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
+                  className="px-[30px] py-[9px] bg-[#E3D7FA] hover:bg-[#D5C2F7] text-[#3C2D4D] text-[9px] sm:text-xs md:text-sm font-semibold tracking-wider rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
                 >
                   <span>자세히 보기</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -357,4 +367,3 @@ export default function Hero({ onExploreClick }: HeroProps) {
     </section>
   );
 }
-
