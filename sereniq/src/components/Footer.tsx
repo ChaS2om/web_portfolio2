@@ -19,6 +19,19 @@ export default function Footer() {
     }, 3000);
   };
 
+  const scrollToGreenRecycle = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const target = document.getElementById('green-recycle');
+    if (!target) return;
+
+    const headerOffset = 76;
+    const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({
+      top: elementPosition - headerOffset,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <footer id="footer" className="bg-sereniq-rose py-16 md:py-20 font-sans border-t border-sereniq-pink/30 text-sereniq-brown" data-purpose="footer">
       <div className="max-w-[1440px] mx-auto px-4 lg:px-[140px]">
@@ -85,7 +98,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" onClick={(e) => { e.preventDefault(); alert("세레니크 비유기 용기 수거 캠페인 진행 중입니다."); }} className="hover:text-sereniq-pink transition-colors">
+                <a href="#green-recycle" onClick={scrollToGreenRecycle} className="hover:text-sereniq-pink transition-colors">
                   Sustainability (그린 재생 아카이브)
                 </a>
               </li>

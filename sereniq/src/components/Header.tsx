@@ -70,15 +70,15 @@ export default function Header({
           </div>
 
           {/* Icon Controls */}
-          <div className="flex items-center justify-end space-x-4 lg:space-x-6 w-1/3 text-sereniq-brown">
+          <div className="flex items-center justify-end space-x-2 sm:space-x-4 lg:space-x-6 w-1/3 text-sereniq-brown">
             {/* Search Icon */}
             <button
               id="search-toggle-btn"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className={`p-1.5 hover:opacity-60 transition-opacity cursor-pointer ${isSearchOpen ? 'text-sereniq-pink' : ''}`}
+              className={`p-1 hover:opacity-60 transition-opacity cursor-pointer sm:p-1.5 ${isSearchOpen ? 'text-sereniq-pink' : ''}`}
               aria-label="Toggle Search"
             >
-              <Search className="h-5 w-5 stroke-[1.5]" />
+              <Search className="h-4 w-4 sm:h-5 sm:w-5 stroke-[1.5]" />
             </button>
 
             {/* Account Icon */}
@@ -86,10 +86,10 @@ export default function Header({
               <button
                 id="account-toggle-btn"
                 onClick={() => setIsAccountOpen(!isAccountOpen)}
-                className={`p-1.5 hover:opacity-60 transition-opacity cursor-pointer ${isAccountOpen ? 'text-sereniq-pink' : ''}`}
+                className={`p-1 hover:opacity-60 transition-opacity cursor-pointer sm:p-1.5 ${isAccountOpen ? 'text-sereniq-pink' : ''}`}
                 aria-label="Toggle Account Info"
               >
-                <User className="h-5 w-5 stroke-[1.5]" />
+                <User className="h-4 w-4 sm:h-5 sm:w-5 stroke-[1.5]" />
               </button>
 
               {/* User Account Dropdown */}
@@ -108,7 +108,7 @@ export default function Header({
                           <span className="text-xs uppercase tracking-widest text-sereniq-gray">Membership Grade</span>
                           <span className="px-2 py-0.5 bg-sereniq-rose text-sereniq-brown text-[10px] uppercase font-bold tracking-wider rounded">VIP</span>
                         </div>
-                        <h4 className="font-semibold text-base">khk030811@gmail.com 님</h4>
+                        <h4 className="font-semibold text-base">hello@sereniq.com 님</h4>
                         <p className="text-[11px] text-sereniq-gray/80 mt-1">세레니크에 머무시는 매 순간 평온함이 가득하시길 바랍니다.</p>
                       </div>
 
@@ -148,10 +148,10 @@ export default function Header({
             <button
               id="cart-toggle-btn"
               onClick={onOpenCart}
-              className="p-1.5 hover:opacity-60 transition-opacity relative cursor-pointer"
+              className="p-1 hover:opacity-60 transition-opacity relative cursor-pointer sm:p-1.5"
               aria-label="Toggle Shopping Cart"
             >
-              <ShoppingBag className="h-5 w-5 stroke-[1.5]" />
+              <ShoppingBag className="h-4 w-4 sm:h-5 sm:w-5 stroke-[1.5]" />
               {cartCount > 0 && (
                 <motion.span
                   initial={{ scale: 0 }}
@@ -288,7 +288,7 @@ export default function Header({
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'tween', duration: 0.3 }}
-              className="fixed top-0 left-0 w-full sm:w-[360px] h-full bg-white z-50 p-8 flex flex-col justify-between font-sans border-r border-sereniq-rose/40 shadow-2xl"
+              className="fixed top-0 left-0 w-full sm:w-[min(360px,40vw)] h-full bg-white z-50 p-8 flex flex-col justify-between font-sans border-r border-sereniq-rose/40 shadow-2xl"
             >
               <div>
                 <div className="flex justify-between items-center mb-10">

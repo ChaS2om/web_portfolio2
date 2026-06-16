@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import Philosophy from './components/Philosophy';
 import Products from './components/Products';
 import Showcase from './components/Showcase';
+import CtaSection from './components/CtaSection';
 import Reviews from './components/Reviews';
 import Footer from './components/Footer';
 import ProductModal from './components/ProductModal';
@@ -164,6 +165,9 @@ export default function App() {
           onAddReview={handleAddReview}
           onOpenProduct={(product) => setSelectedProduct(product)}
         />
+
+        {/* Green Recycle CTA section */}
+        <CtaSection />
       </main>
 
       {/* Base footer */}
